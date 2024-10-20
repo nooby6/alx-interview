@@ -2,7 +2,7 @@
 """
 This module contains a function that calculates
 the minimum number of operations needed to achieve exactly n
-'H' characters in the file.
+'H' characters in a file.
 """
 
 
@@ -29,4 +29,4 @@ def minOperations(n):
             n //= factor
         factor += 1
 
-    return operations
+    return operationis
