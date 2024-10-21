@@ -1,18 +1,33 @@
+#!/usr/bin/python3
+"""
+0-lockboxes.py
+"""
+
+
 def canUnlockAll(boxes):
-    n = len(boxes)  # Number of boxes
-    unlocked = set([0])  # Set to track unlocked boxes, initially only box 0 is unlocked
-    keys = set(boxes[0])  # Keys found in the first box
+    """
+    Determines if all boxes can be opened.
 
-    # Continue unlocking boxes until no new boxes can be unlocked
+    Args:
+        boxes (list of lists): Each list contains keys to other boxes.
+
+    Returns:
+        bool: True if all boxes can be opened, False otherwise.
+    """
+    if not boxes:
+        return False
+
+    # Initialize the set of opened boxes and start with box 0
+    opened_boxes = set([0])
+    keys = [0]  # List to process boxes with keys
+
+    # Process boxes as long as there are keys to check
     while keys:
-        new_keys = set()  # New set to collect keys from newly unlocked boxes
+        current_box = keys.pop()  # Get the current box to check
+        for key in boxes[current_box]:
+            if key not in opened_boxes and key < len(boxes):
+                opened_boxes.add(key)
+                keys.append(key)
 
-        for key in keys:
-            if key < n and key not in unlocked:  # Ensure key is valid and the box isn't already unlocked
-                unlocked.add(key)  # Mark the box as unlocked
-                new_keys.update(boxes[key])  # Add new keys from this unlocked box
-
-        keys = new_keys  # Move to the next set of keys
-
-    return len(unlocked) == n  # Check if all boxes are unlocked
-
+    # Check if the number of opened boxes equals the total number of boxes
+    return len(opened_boxes) == len(boxes)
