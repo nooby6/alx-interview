@@ -3,6 +3,7 @@
 0-making_change.py
 """
 
+
 def makeChange(coins, total):
     # If the total is negative, return -1 as it's not possible to make change
     if total < 0:
@@ -19,7 +20,8 @@ def makeChange(coins, total):
     for coin in coins:
         # For each coin, update the dp list for all amounts from coin to total
         for amount in range(coin, total + 1):
-            # Update the dp value for the current amount
+            dp[amount] = min(dp[amount], 
+                              1 + dp[amount - coin])
             dp[amount] = min(dp[amount], 1 + dp[amount - coin])
 
     # If dp[total] is still float('inf'), it means it's not possible to make change for the total
