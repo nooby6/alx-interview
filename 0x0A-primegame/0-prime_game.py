@@ -4,7 +4,7 @@
 
 def generate_primes(n):
     """
-    returns a list of primes
+    Returns a list of prime numbers up to n (inclusive).
     """
     primes = []
     for i in range(2, n + 1):
@@ -20,18 +20,26 @@ def generate_primes(n):
 
 def isWinner(x, nums):
     """
-    Returns the winner
+    Determines the winner of the prime game.
+    
+    Parameters:
+    x (int): the number of rounds
+    nums (list): list of integers representing the upper limit for each round
+    
+    Returns:
+    str: the name of the player with the most wins, or None if it's a tie
     """
     if not nums or x < 1 or len(nums) < x:
         return None
-    wins = {"ben": 0, "maria": 0}
+    
+    wins = {"ben": 0, "maria": 0}  # Dictionary to keep track of wins for each player
     i = 0
 
     while i < x:
-        primes = generate_primes(nums[i])
-        if len(primes) % 2 == 0:
+        primes = generate_primes(nums[i])  # Generate primes up to nums[i]
+        if len(primes) % 2 == 0:  # If the number of primes is even, Ben wins the round
             wins["ben"] += 1
-        else:
+        else:  # If the number of primes is odd, Maria wins the round
             wins["maria"] += 1
         i += 1
 
